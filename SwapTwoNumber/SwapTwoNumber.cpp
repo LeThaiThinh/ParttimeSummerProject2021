@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-void swap_ref(int& a,int& b) {
+void swap_ref(int& a, int& b) {
     int temp = a;
     a = b;
     b = temp;
@@ -18,7 +18,7 @@ int main()
     int c = 3;
     int d = 4;
     swap_ref(a, b);
-    std::cout << std::to_string(a) +" and "+ std::to_string(b)+"\n";
+    std::cout << std::to_string(a) + " and " + std::to_string(b) + "\n";
     swap_pointer(&c, &d);
     std::cout << std::to_string(c) + " and " + std::to_string(d) + "\n";
 }

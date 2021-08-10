@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Swap.cpp">
+    <ClCompile Include="SwapTwoNumber.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
