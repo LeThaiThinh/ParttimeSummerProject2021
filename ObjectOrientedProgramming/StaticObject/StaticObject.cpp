@@ -8,10 +8,10 @@ StaticObject::~StaticObject(){}
 
 void StaticObject::move(Position position)
 {
-	std::cout << "It's static ,cant move" << std::endl;
+	std::cout << getName() + " is static ,cant move" << std::endl;
 }
 
 void StaticObject::move(float x, float y)
 {
-	std::cout << "It's static ,cant move" << std::endl;
+	std::cout << getName() + " is static ,cant move" << std::endl;
 }
