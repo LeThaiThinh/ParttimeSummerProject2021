@@ -31,7 +31,7 @@ void MainCharacter::Update(GLfloat deltatime)
 
 void MainCharacter::Init()
 {
-	Set2DPosition(Vector2(Globals::screenWidth/2, Globals::screenHeight/2));
+	Set2DPosition(Vector2(Globals::screenWidth/2, Globals::screenHeight-50));
 	SetSize(60, 80);
 	SetVelocity(Vector3(50.0f, 0.0f, 0.0f));
 }

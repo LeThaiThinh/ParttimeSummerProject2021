@@ -6,7 +6,7 @@ class MainCharacter
 protected:
 
 public:
-	MainCharacter() : Sprite2D() {}
+	MainCharacter() : Sprite2D(), m_time(0.0f) {}
 	MainCharacter(GLint id, std::shared_ptr<Model> model, std::shared_ptr<Shader> shader, std::shared_ptr<Texture> texture);
 	MainCharacter(GLint id, std::shared_ptr<Model> model, std::shared_ptr<Shader> shader, Vector4 color);
 	MainCharacter(std::shared_ptr<Model> model, std::shared_ptr<Shader> shader, std::shared_ptr<Texture> texture);
