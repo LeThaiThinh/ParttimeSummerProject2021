@@ -3,24 +3,26 @@
 class MainCharacter
 	: public Sprite2D
 {
-protected:
-
 public:
-	MainCharacter() : Sprite2D(), m_time(0.0f) {}
+	enum Direction {
+		LEFT,
+		RIGHT
+	};
+	MainCharacter() : Sprite2D(), m_time(0.0f), m_velocity(50.0f) {}
 	MainCharacter(GLint id, std::shared_ptr<Model> model, std::shared_ptr<Shader> shader, std::shared_ptr<Texture> texture);
 	MainCharacter(GLint id, std::shared_ptr<Model> model, std::shared_ptr<Shader> shader, Vector4 color);
 	MainCharacter(std::shared_ptr<Model> model, std::shared_ptr<Shader> shader, std::shared_ptr<Texture> texture);
 	~MainCharacter();
 
-	void	Update(GLfloat deltatime) override;
+	void	Update(GLfloat) override;
 	void	Init() override;
-	void	HandleKeyEvent(int key,bool bbIsPresseded);
 
-	void	SetVelocity(Vector3);
-	Vector3	GetVelocity();
-	void	Move(GLfloat deltatime, GLfloat duration);
+	void	SetVelocity(float);
+	float	GetVelocity();
+	void	Move(GLfloat, GLfloat, Direction);
+	void	Move(GLfloat deltatime, Direction direction);
 private:
-	Vector3 m_velocity;
+	float m_velocity;
 	float m_time;
 
 };

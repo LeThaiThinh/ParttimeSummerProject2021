@@ -1,5 +1,4 @@
 #include "GSPlay.h"
-
 #include "Shader.h"
 #include "Texture.h"
 #include "Model.h"
@@ -19,6 +18,7 @@ GSPlay::~GSPlay()
 {
 }
 
+int GameStateBase::keyPress = 0;
 
 void GSPlay::Init()
 {
@@ -71,10 +71,39 @@ void GSPlay::Resume()
 void GSPlay::HandleEvents()
 {
 }
-
 void GSPlay::HandleKeyEvents(int key, bool bIsPressed)
 {
-	m_mainCharacter->HandleKeyEvent(key, bIsPressed);
+	if (bIsPressed == true) {
+		switch (key)
+		{
+		case 'A':
+			keyPress |= KEY_MOVE_LEFT;
+			break;
+		case 'D':
+			keyPress |= KEY_MOVE_RIGHT;
+			break;
+		case VK_SPACE:
+			keyPress |= KEY_SPACE;
+			break;
+		default:
+			break;
+		}
+	}
+	else {
+		switch (key) {
+		case 'A':
+			keyPress ^= KEY_MOVE_LEFT;
+			break;
+		case 'D':
+			keyPress ^= KEY_MOVE_RIGHT;
+			break;
+		case VK_SPACE:
+			keyPress ^= KEY_SPACE;
+			break;
+		default:
+			break;
+		}
+	}
 }
 
 void GSPlay::HandleTouchEvents(int x, int y, bool bIsPressed)
@@ -94,12 +123,21 @@ void GSPlay::HandleMouseMoveEvents(int x, int y)
 
 void GSPlay::Update(float deltaTime)
 {
+	m_time += deltaTime;
+	if (keyPress & KEY_MOVE_LEFT){
+		m_mainCharacter->Move(deltaTime,MainCharacter::LEFT);
+	}
+	if (keyPress & KEY_MOVE_RIGHT) {
+		m_mainCharacter->Move(deltaTime, MainCharacter::RIGHT);
+	}
+	if (keyPress & KEY_SPACE) {
+		LOGI("shoot")
+	}
 	for (auto it : m_listButton)
 	{
 		it->Update(deltaTime);
 	}
 	m_mainCharacter->Update(deltaTime);
-	m_time += deltaTime;
 	m_timer->SetText("Time:" + std::to_string((int)m_time));
 }
 
