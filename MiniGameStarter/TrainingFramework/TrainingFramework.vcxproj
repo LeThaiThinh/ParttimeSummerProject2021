@@ -302,17 +302,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="GSCredit.cpp" />
+    <ClCompile Include="HandFan.cpp" />
     <ClCompile Include="MainCharacter.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\GameManager\ResourceManagers.cpp" />
+    <ClCompile Include="src\GameObject\Camera.cpp" />
     <ClCompile Include="src\GameObject\Font.cpp" />
     <ClCompile Include="src\GameObject\GameButton.cpp" />
-    <ClCompile Include="src\GameObject\Sprite2D.cpp" />
-    <ClCompile Include="src\GameObject\Camera.cpp" />
-    <ClCompile Include="src\GameObject\Sprite3D.cpp" />
     <ClCompile Include="src\GameObject\Model.cpp" />
     <ClCompile Include="src\GameObject\Shader.cpp" />
+    <ClCompile Include="src\GameObject\Sprite2D.cpp" />
+    <ClCompile Include="src\GameObject\Sprite3D.cpp" />
     <ClCompile Include="src\GameObject\Text.cpp" />
     <ClCompile Include="src\GameObject\Texture.cpp" />
     <ClCompile Include="src\GameStates\GameStateBase.cpp" />
@@ -323,23 +325,28 @@
     <ClCompile Include="src\TrainingFramework.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Arrow.h" />
     <ClInclude Include="GSCredit.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="HandFan.h" />
     <ClInclude Include="MainCharacter.h" />
+    <ClInclude Include="Movable.h" />
+    <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SelfDestructable.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\GameConfig.h" />
     <ClInclude Include="src\GameManager\ResourceManagers.h" />
     <ClInclude Include="src\GameManager\Singleton.h" />
     <ClInclude Include="src\GameObject\BaseObject.h" />
+    <ClInclude Include="src\GameObject\Camera.h" />
     <ClInclude Include="src\GameObject\Font.h" />
     <ClInclude Include="src\GameObject\GameButton.h" />
-    <ClInclude Include="src\GameObject\Sprite2D.h" />
-    <ClInclude Include="src\GameObject\Camera.h" />
-    <ClInclude Include="src\GameObject\Sprite3D.h" />
     <ClInclude Include="src\GameObject\Model.h" />
     <ClInclude Include="src\GameObject\Shader.h" />
+    <ClInclude Include="src\GameObject\Sprite2D.h" />
+    <ClInclude Include="src\GameObject\Sprite3D.h" />
     <ClInclude Include="src\GameObject\Text.h" />
     <ClInclude Include="src\GameObject\Texture.h" />
     <ClInclude Include="src\GameStates\GameStateBase.h" />
