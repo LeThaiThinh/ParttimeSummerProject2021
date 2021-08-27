@@ -119,7 +119,6 @@ void Target::Move(float deltaTime)
 bool Target::IsCollided(Arrow* arrow)
 {
 	if ((m_position.x - m_iWidth/2 < arrow->GetPosition().x) && (arrow->GetPosition().x < m_position.x + m_iWidth/2) && (m_position.y > arrow->GetPosition().y) &&(arrow->GetPosition().y > m_position.y-m_iHeight)) {
-		std::cout << "collided";
 		return true;
 	}
 	else return false;

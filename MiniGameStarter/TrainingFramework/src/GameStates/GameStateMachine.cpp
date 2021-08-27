@@ -39,7 +39,6 @@ void GameStateMachine::PushState(StateType state)
 	if (!m_StateStack.empty()) {
 		m_StateStack.back()->Pause();
 	}
-
 	m_pNextState = nextState;
 }
 
@@ -63,6 +62,7 @@ void  GameStateMachine::PerformStateChange()
 	if (m_pNextState != 0)
 	{
 		if (m_StateStack.empty() == false) {
+
 			if(m_pActiveState->GetGameStateType() == StateType::STATE_INTRO)
 			{
 				// Cleanup Intro state
@@ -78,6 +78,11 @@ void  GameStateMachine::PerformStateChange()
 
 		// store and init the new state
 		m_StateStack.push_back(m_pNextState);
+		std::cout << (m_pNextState->GetGameStateType() == StateType::STATE_MENUINGAME ? "menuInGame"
+			: (m_pNextState->GetGameStateType() == StateType::STATE_MENUAFTERGAME ? "menuAfterGame"
+				: (m_pNextState->GetGameStateType() == StateType::STATE_PLAY ? "play"
+					: (m_pNextState->GetGameStateType() == StateType::STATE_MENU ? "menu"
+						:"other"))));
 		m_StateStack.back()->Init();
 		m_pActiveState = m_pNextState;
 	}

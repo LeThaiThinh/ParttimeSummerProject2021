@@ -13,6 +13,8 @@ class GSPlay :
 	public GameStateBase
 {
 public:
+	static int score;
+
 	GSPlay();
 	~GSPlay();
 
@@ -32,12 +34,12 @@ public:
 private:
 	std::shared_ptr<Sprite2D>	m_background;
 	std::shared_ptr<Text>		m_timer;
+	std::shared_ptr<Text>		m_score;
 	std::list<std::shared_ptr<GameButton>>	m_listButton;
 	std::shared_ptr<MainCharacter> m_mainCharacter;
 	ObjectPool<Target>* m_poolTarget;
 	std::list<Target*> m_listTarget;
 	std::list<Target*> m_listRemoveTarget;
-	ObjectPool<Arrow>* m_poolArrow;
 	std::list<Arrow*> m_listArrow;
 	std::list<Arrow*> m_listRemoveArrow;
 	float m_time;

@@ -58,10 +58,10 @@ void GSMenu::Init()
 	// exit button
 	texture = ResourceManagers::GetInstance()->GetTexture("btn_close.tga");
 	button = std::make_shared<GameButton>(model, shader, texture);
-	button->Set2DPosition(Globals::screenWidth / 3, Globals::screenHeight * 3 / 4);
-	button->SetSize(75, 75);
+	button->Set2DPosition(Globals::screenWidth - 50, 50);
+	button->SetSize(50, 50);
 	button->SetOnClick([]() {
-		exit(0);
+		GameStateMachine::GetInstance()->PopState();
 		});
 	m_listButton.push_back(button);
 

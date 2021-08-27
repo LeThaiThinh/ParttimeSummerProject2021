@@ -29,6 +29,5 @@ public:
 	static int keyPress;
 protected:
 	StateType m_stateType;
-
 };
 

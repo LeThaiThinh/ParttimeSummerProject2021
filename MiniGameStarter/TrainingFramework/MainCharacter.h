@@ -14,7 +14,7 @@ class MainCharacter
 {
 public:
 
-	MainCharacter() : Sprite2D(),m_shootInterval(1),m_shootTime(0),m_poolArrow(nullptr) {}
+	MainCharacter() : Sprite2D(),m_shootInterval(1),m_shootTime(0),m_poolArrow() {}
 	MainCharacter(GLint id, std::shared_ptr<Model> model, std::shared_ptr<Shader> shader, std::shared_ptr<Texture> texture);
 	MainCharacter(GLint id, std::shared_ptr<Model> model, std::shared_ptr<Shader> shader, Vector4 color);
 	MainCharacter(std::shared_ptr<Model> model, std::shared_ptr<Shader> shader, std::shared_ptr<Texture> texture);
@@ -27,7 +27,7 @@ public:
 	void	Move(GLfloat deltatime);
 
 	Arrow*  Shoot();
-
+	void	ReturnResourceArrow(Arrow* arrow);
 private:
 	ObjectPool<Arrow>* m_poolArrow;
 	float m_shootInterval;

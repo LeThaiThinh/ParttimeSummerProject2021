@@ -10,10 +10,9 @@
 #include "GameButton.h"
 #include "../HandFan.h"
 
-GSPlay::GSPlay() :GameStateBase(StateType::STATE_INTRO), m_time(0.0f),m_poolTarget(__nullptr)
+GSPlay::GSPlay() :GameStateBase(StateType::STATE_PLAY), m_time(60.0f),m_poolTarget(ObjectPool<Target>::getInstance())
 {
 }
-
 
 GSPlay::~GSPlay()
 {
@@ -21,7 +20,7 @@ GSPlay::~GSPlay()
 
 int GameStateBase::keyPress = 0;
 ObjectPool<Target>* ObjectPool<Target>::instance = 0;
-
+int GSPlay::score = 0;
 void GSPlay::Init()
 {
 	srand(time(0));
@@ -36,25 +35,25 @@ void GSPlay::Init()
 	m_background->SetSize(Globals::screenWidth, Globals::screenHeight);
 
 	// button close
-	texture = ResourceManagers::GetInstance()->GetTexture("btn_close.tga");
+	texture = ResourceManagers::GetInstance()->GetTexture("btn_menu.tga");
 	std::shared_ptr<GameButton>  button = std::make_shared<GameButton>(model, shader, texture);
 	button->Set2DPosition((float)Globals::screenWidth - 50, 50.0f);
 	button->SetSize(50, 50);
 	button->SetOnClick([]() {
-		GameStateMachine::GetInstance()->PopState();
+		GameStateMachine::GetInstance()->ChangeState(StateType::STATE_MENUINGAME);
 		});
 	m_listButton.push_back(button);
 	// main character
 	texture = ResourceManagers::GetInstance()->GetTexture("MainCharacter.tga");
 	m_mainCharacter = std::make_shared<MainCharacter>(model, shader, texture);
-	// pool tartget
-	m_poolTarget = ObjectPool<Target>::getInstance();
-	m_poolArrow = ObjectPool<Arrow>::getInstance();
 	// timer
 	shader = ResourceManagers::GetInstance()->GetShader("TextShader");
 	std::shared_ptr<Font> font = ResourceManagers::GetInstance()->GetFont("Brightly Crush Shine.otf");
 	m_timer = std::make_shared< Text>(shader, font, "Time:"+std::to_string((int)m_time), TextColor::RED, 1.0f);
 	m_timer->Set2DPosition(Vector2(5, 25));
+	// score
+	m_score = std::make_shared< Text>(shader, font, "Score:" + std::to_string(GSPlay::score), TextColor::RED, 1.0f);
+	m_score->Set2DPosition(Vector2(Globals::screenWidth/2-50, 25));
 	
 
 }
@@ -127,7 +126,12 @@ void GSPlay::HandleMouseMoveEvents(int x, int y)
 
 void GSPlay::Update(float deltaTime)
 {
-	m_time += deltaTime;
+	m_time -= deltaTime;
+	if (m_time <= 0)
+	{
+		GameStateMachine::GetInstance()->ChangeState(StateType::STATE_MENUAFTERGAME);
+		m_time = 0;
+	}
 	//manage main character
 	m_mainCharacter->Update(deltaTime);
 	if (keyPress & KEY_MOVE_LEFT) {
@@ -161,6 +165,7 @@ void GSPlay::Update(float deltaTime)
 			if (it->IsCollided(arrow)) {
 				m_listRemoveTarget.push_back(it);
 				m_poolTarget->returnResource(it);
+				GSPlay::score++;
 			}
 		}
 		if (!it->IsExist()) {
@@ -179,7 +184,7 @@ void GSPlay::Update(float deltaTime)
 		it->Update(deltaTime);
 		if (!it->IsExist()) {
 			m_listRemoveArrow.push_back(it);
-			m_poolArrow->returnResource(it);
+			m_mainCharacter->ReturnResourceArrow(it);
 		}
 	}
 	for (auto it : m_listRemoveArrow)
@@ -189,12 +194,14 @@ void GSPlay::Update(float deltaTime)
 	m_listRemoveArrow.clear();
 	//timer
 	m_timer->SetText("Time:" + std::to_string((int)m_time));
+	m_score->SetText("Score:" + std::to_string(score));
 }
 
 void GSPlay::Draw()
 {
 	m_background->Draw();
 	m_timer->Draw();
+	m_score->Draw();
 	for (auto it : m_listButton)
 	{
 		it->Draw();

@@ -65,3 +65,8 @@ Arrow* MainCharacter::Shoot()
 	return nullptr;
 }
 
+void MainCharacter::ReturnResourceArrow(Arrow* arrow)
+{
+	m_poolArrow->returnResource(arrow);
+}
+

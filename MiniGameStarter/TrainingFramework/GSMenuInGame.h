@@ -1,12 +1,12 @@
 #pragma once
-#include "GameStates/GameStateBase.h"
-#include "GameButton.h"
-class GSCredit :
-	public GameStateBase
+#include "./GameStates/GameStateBase.h"
+#include <GameButton.h>
+class GSMenuInGame :
+    public GameStateBase
 {
 public:
-	GSCredit();
-	~GSCredit();
+	GSMenuInGame();
+	~GSMenuInGame();
 
 	void	Init() override;
 	void	Exit() override;
@@ -25,5 +25,5 @@ private:
 	std::shared_ptr<Sprite2D>				m_background;
 	std::list<std::shared_ptr<GameButton>>	m_listButton;
 	std::list < std::shared_ptr<Text>>		m_textGameName;
-
 };
+

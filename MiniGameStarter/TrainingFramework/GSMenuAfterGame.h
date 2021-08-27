@@ -1,12 +1,14 @@
 #pragma once
-#include "GameStates/GameStateBase.h"
-#include "GameButton.h"
-class GSCredit :
-	public GameStateBase
+#include "./GameStates/GameStateBase.h"
+#include <GameButton.h>
+#include <GameStates/GSPlay.h>
+
+class GSMenuAfterGame :
+    public GameStateBase
 {
 public:
-	GSCredit();
-	~GSCredit();
+	GSMenuAfterGame();
+	~GSMenuAfterGame();
 
 	void	Init() override;
 	void	Exit() override;
@@ -27,3 +29,4 @@ private:
 	std::list < std::shared_ptr<Text>>		m_textGameName;
 
 };
+

@@ -304,6 +304,8 @@
   <ItemGroup>
     <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="GSCredit.cpp" />
+    <ClCompile Include="GSMenuAfterGame.cpp" />
+    <ClCompile Include="GSMenuInGame.cpp" />
     <ClCompile Include="HandFan.cpp" />
     <ClCompile Include="MainCharacter.cpp" />
     <ClCompile Include="src\Application.cpp" />
@@ -326,10 +328,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arrow.h" />
-    <ClInclude Include="GSCredit.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
+    <ClInclude Include="GSMenuAfterGame.h" />
+    <ClInclude Include="GSMenuInGame.h" />
     <ClInclude Include="HandFan.h" />
+    <ClInclude Include="GSCredit.h" />
     <ClInclude Include="MainCharacter.h" />
     <ClInclude Include="Movable.h" />
     <ClInclude Include="ObjectPool.h" />

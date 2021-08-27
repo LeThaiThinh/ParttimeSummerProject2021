@@ -84,6 +84,12 @@
     <ClCompile Include="src\GameObject\Texture.cpp">
       <Filter>TrainingFramework\src\GameObject\Base</Filter>
     </ClCompile>
+    <ClCompile Include="GSMenuAfterGame.cpp">
+      <Filter>TrainingFramework\src\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="GSMenuInGame.cpp">
+      <Filter>TrainingFramework\src\GameStates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h">
@@ -112,9 +118,6 @@
     </ClInclude>
     <ClInclude Include="src\GameManager\ResourceManagers.h">
       <Filter>TrainingFramework\src\GameManager</Filter>
-    </ClInclude>
-    <ClInclude Include="GSCredit.h">
-      <Filter>TrainingFramework\src\GameStates</Filter>
     </ClInclude>
     <ClInclude Include="ObjectPool.h">
       <Filter>TrainingFramework\src\GameManager</Filter>
@@ -166,6 +169,15 @@
     </ClInclude>
     <ClInclude Include="SelfDestructable.h">
       <Filter>TrainingFramework\src\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GSCredit.h">
+      <Filter>TrainingFramework\src\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GSMenuAfterGame.h">
+      <Filter>TrainingFramework\src\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GSMenuInGame.h">
+      <Filter>TrainingFramework\src\GameStates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
