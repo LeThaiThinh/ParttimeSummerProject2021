@@ -1,39 +1,37 @@
-#include "Sprite2D.h"
+#include "AnimationSprite.h"
 #include "Shader.h"
 #include "Model.h"
 #include "Camera.h"
 #include "Texture.h"
 #include "Application.h"
-
-Sprite2D::Sprite2D(GLint id, std::shared_ptr<Model> model, std::shared_ptr<Shader> shader, std::shared_ptr<Texture> texture)
-	: BaseObject(id, model, shader, texture), m_iWidth(100), m_iHeight(50), m_vboId(0)
+AnimationSprite::AnimationSprite()
+	:m_currentFrame(0),m_frameTime(0),m_numFrames(0),m_currentFrameTime(0)
 {
+}
+
+AnimationSprite::AnimationSprite( std::shared_ptr<Model> model, std::shared_ptr<Shader> shader, std::shared_ptr<Texture> texture, int numFrames, float frameTime, float x, float y)
+	:Sprite2D(model,shader,texture), m_numFrames(numFrames), m_frameTime(frameTime),m_currentFrame(0), m_currentFrameTime(0)
+{
+	Set2DPosition(Vector2(x, y));
 	Init();
 }
-
-Sprite2D::Sprite2D(GLint id, std::shared_ptr<Model> model, std::shared_ptr<Shader> shader, Vector4 color)
-	: BaseObject(id, model, shader, color), m_iWidth(100), m_iHeight(50), m_vboId(0)
+AnimationSprite::AnimationSprite(int numFrames, float frameTime, float x, float y)
+	: m_numFrames(numFrames), m_frameTime(frameTime), m_currentFrame(0), m_currentFrameTime(0)
 {
+	Set2DPosition(Vector2(x, y));
 	Init();
 }
-
-Sprite2D::Sprite2D(std::shared_ptr<Model> model, std::shared_ptr<Shader> shader, std::shared_ptr<Texture> texture)
-	: BaseObject(-1, model, shader, texture), m_iWidth(100), m_iHeight(50), m_vboId(0)
-{
-	Init();
-}
-
-Sprite2D::~Sprite2D()
+AnimationSprite::~AnimationSprite()
 {
 }
 
-void Sprite2D::Init()
+void AnimationSprite::Init()
 {
 	SetCamera(Application::GetInstance()->GetCamera());
 	CalculateWorldMatrix();
 }
 
-void Sprite2D::Draw()
+void AnimationSprite::Draw()
 {
 	if (m_pCamera == nullptr) return;
 	glUseProgram(m_pShader->m_program);
@@ -88,40 +86,32 @@ void Sprite2D::Draw()
 		glUniformMatrix4fv(iTempShaderVaribleGLID, 1, GL_FALSE, wvpMatrix.m[0]);
 
 
+	iTempShaderVaribleGLID = -1;
+	iTempShaderVaribleGLID = m_pShader->GetUniformLocation((char*)"u_currentFrame");
+	if (iTempShaderVaribleGLID != -1)
+		glUniform1f(iTempShaderVaribleGLID, (float)m_currentFrame);
+
+	iTempShaderVaribleGLID = -1;
+	iTempShaderVaribleGLID = m_pShader->GetUniformLocation((char*)"u_numFrames");
+	if (iTempShaderVaribleGLID != -1)
+		glUniform1f(iTempShaderVaribleGLID, (float)m_numFrames);
 
 	glDrawElements(GL_TRIANGLES, m_pModel->GetNumIndiceObject(), GL_UNSIGNED_INT, 0);
-
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 }
 
-void Sprite2D::Update(GLfloat deltatime)
+void AnimationSprite::Update(GLfloat deltatime)
 {
+	m_currentFrameTime += deltatime;
+	if (m_currentFrameTime >= m_frameTime) {
+		m_currentFrame++;
+		if (m_currentFrame >= m_numFrames) {
+			m_currentFrame = 0;
+		}
+		m_currentFrameTime -= m_frameTime;
+	}
 }
 
-void Sprite2D::Set2DPosition(GLfloat x, GLfloat y)
-{
-	m_position = Vector3(x, y, 0.0f);
-	CalculateWorldMatrix();
-}
-
-void Sprite2D::Set2DPosition(Vector2 position)
-{
-	m_position = Vector3(position.x, position.y, 0.0f);
-	CalculateWorldMatrix();
-}
-
-void Sprite2D::SetSize(GLint width, GLint height)
-{
-	m_iWidth = width;
-	m_iHeight = height;
-	m_scale = Vector3((GLfloat)m_iWidth, (GLfloat)m_iHeight, 1.0f);
-	CalculateWorldMatrix();
-}
-
-Vector2 Sprite2D::GetSize()
-{
-	return Vector2((float)m_iWidth,(float)m_iHeight);
-}

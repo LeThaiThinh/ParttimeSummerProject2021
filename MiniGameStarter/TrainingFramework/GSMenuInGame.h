@@ -1,6 +1,7 @@
 #pragma once
 #include "./GameStates/GameStateBase.h"
 #include <GameButton.h>
+#include <GameStates/GSPlay.h>
 class GSMenuInGame :
     public GameStateBase
 {

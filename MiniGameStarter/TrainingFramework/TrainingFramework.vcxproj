@@ -302,7 +302,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationSprite.cpp" />
     <ClCompile Include="Arrow.cpp" />
+    <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="GSCredit.cpp" />
     <ClCompile Include="GSMenuAfterGame.cpp" />
     <ClCompile Include="GSMenuInGame.cpp" />
@@ -327,7 +329,9 @@
     <ClCompile Include="src\TrainingFramework.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationSprite.h" />
     <ClInclude Include="Arrow.h" />
+    <ClInclude Include="Explosion.h" />
     <ClInclude Include="GSMenuAfterGame.h" />
     <ClInclude Include="GSMenuInGame.h" />
     <ClInclude Include="HandFan.h" />

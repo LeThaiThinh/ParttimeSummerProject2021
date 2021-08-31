@@ -38,11 +38,11 @@ void Arrow::Update(GLfloat deltaTime)
 void Arrow::Init()
 {
 	m_time = 0;
-	m_timeExist = 5;
+	m_timeExist = 4;
 	SetModels(ResourceManagers::GetInstance()->GetModel("Sprite2D.nfg"));
 	SetShaders(ResourceManagers::GetInstance()->GetShader("TextureShader"));
 	SetTexture(ResourceManagers::GetInstance()->GetTexture("Arrow.tga"));
-	SetSpeed(500.0f);
+	SetSpeed(700.0f);
 	SetDirection(Vector2(0,-1));
 	SetSize(25, 75);
 	SetCamera(Application::GetInstance()->GetCamera());

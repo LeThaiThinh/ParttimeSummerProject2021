@@ -3,6 +3,9 @@
 #include "../../MainCharacter.h"
 #include "../../ObjectPool.h"
 #include "../../HandFan.h"
+#include "../../Explosion.h"
+#include "GameButton.h"
+
 
 class Sprite2D;
 class Sprite3D;
@@ -14,6 +17,7 @@ class GSPlay :
 {
 public:
 	static int score;
+	static int scoreOpponent;
 
 	GSPlay();
 	~GSPlay();
@@ -31,17 +35,24 @@ public:
 	void	Update(float deltaTime) override;
 	void	Draw() override;
 
+
 private:
 	std::shared_ptr<Sprite2D>	m_background;
 	std::shared_ptr<Text>		m_timer;
 	std::shared_ptr<Text>		m_score;
+	std::shared_ptr<Text>		m_scoreOpponent;
 	std::list<std::shared_ptr<GameButton>>	m_listButton;
 	std::shared_ptr<MainCharacter> m_mainCharacter;
+	std::shared_ptr<MainCharacter> m_mainOpponent;
 	ObjectPool<Target>* m_poolTarget;
 	std::list<Target*> m_listTarget;
 	std::list<Target*> m_listRemoveTarget;
 	std::list<Arrow*> m_listArrow;
+	std::list<Arrow*> m_listArrowOpponent;
 	std::list<Arrow*> m_listRemoveArrow;
+	std::list<Explosion*> m_listExplosion;
+	std::list<Explosion*> m_listRemoveExplosion;
+
 	float m_time;
 };
 

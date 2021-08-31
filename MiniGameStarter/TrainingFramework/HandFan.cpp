@@ -47,15 +47,15 @@ void Target::Init()
 	SetModels(ResourceManagers::GetInstance()->GetModel("Sprite2D.nfg"));
 	SetShaders(ResourceManagers::GetInstance()->GetShader("TextureShader"));
 	int random = rand() % 7;
-	float y{};
-	float x{};
+	float y=0;
+	float x=0;
 	m_time = 0;
 	y = (float)(rand() % Globals::screenHeight * 2 / 3 + Globals::screenHeight * 1 / 12);
 	if (random <=3 ) {
 		SetTexture(ResourceManagers::GetInstance()->GetTexture("TargetHandFan.tga"));
 		SetSpeed(50.0f);
 		SetSize(50, 50);
-		type = TargetType::HANDFAN;
+		SetType(TargetType::HANDFAN);
 		m_timeExist = 7.0f;
 		if (rand() % 2 == 0) {
 			x = (float)m_iWidth / 2;
@@ -69,8 +69,8 @@ void Target::Init()
 	else if (random <= 5) {
 		SetTexture(ResourceManagers::GetInstance()->GetTexture("TargetCircle.tga"));
 		SetSize(75, 100);
-		SetSpeed(125.0f);
-		type = TargetType::CIRCLE;
+		SetSpeed(175.0f);
+		SetType(TargetType::CIRCLE);
 		m_timeExist = 10.0f;
 		if (rand() % 2 == 0) {
 			x = (float)- m_iWidth / 2;
@@ -82,9 +82,9 @@ void Target::Init()
 	}
 	else if (random == 6) {
 		SetTexture(ResourceManagers::GetInstance()->GetTexture("Bomb.tga"));
-		SetSpeed(75.0f);
+		SetSpeed(100.0f);
 		SetSize(50, 75);
-		type = TargetType::BOMB;
+		SetType(TargetType::BOMB);
 		m_timeExist = 15.0f;
 		if (rand() % 2 == 0) {
 			x = (float)-m_iWidth / 2;
@@ -118,9 +118,15 @@ void Target::Move(float deltaTime)
 
 bool Target::IsCollided(Arrow* arrow)
 {
-	if ((m_position.x - m_iWidth/2 < arrow->GetPosition().x) && (arrow->GetPosition().x < m_position.x + m_iWidth/2) && (m_position.y > arrow->GetPosition().y) &&(arrow->GetPosition().y > m_position.y-m_iHeight)) {
+	if ((m_position.x - m_iWidth /2 < arrow->GetPosition().x) && (arrow->GetPosition().x < m_position.x + m_iWidth / 2) && (m_position.y > arrow->GetPosition().y) &&(arrow->GetPosition().y > m_position.y-m_iHeight)) {
 		return true;
 	}
 	else return false;
 }
-
+bool Target::IsCollided(Explosion* explosion)
+{
+	if ((m_position.x  < explosion->GetPosition().x + explosion->GetSize().x/2) && (explosion->GetPosition().x - explosion->GetSize().x/2 < m_position.x ) && (m_position.y > explosion->GetPosition().y - explosion->GetSize().y/2) && (explosion->GetPosition().y+explosion->GetSize().y/2 > m_position.y )) {
+		return true;
+	}
+	else return false;
+}

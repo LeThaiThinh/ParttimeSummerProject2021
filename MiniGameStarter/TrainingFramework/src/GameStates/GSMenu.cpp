@@ -28,8 +28,8 @@ void GSMenu::Init()
 	// play button
 	texture = ResourceManagers::GetInstance()->GetTexture("btn_play.tga");
 	std::shared_ptr<GameButton> button = std::make_shared<GameButton>(model, shader, texture);
-	button->Set2DPosition(Globals::screenWidth / 6, Globals::screenHeight / 2);
-	button->SetSize(75, 75);
+	button->Set2DPosition(Globals::screenWidth / 3, Globals::screenHeight * 7 / 12);
+	button->SetSize(125, 125);
 	button->SetOnClick([]() {
 		GameStateMachine::GetInstance()->ChangeState(StateType::STATE_PLAY);
 		});
@@ -38,17 +38,17 @@ void GSMenu::Init()
 	// credit button
 	texture = ResourceManagers::GetInstance()->GetTexture("btn_help.tga");
 	button = std::make_shared<GameButton>(model, shader, texture);
-	button->Set2DPosition(Globals::screenWidth / 3, Globals::screenHeight / 2);
+	button->Set2DPosition(Globals::screenWidth / 3-175, Globals::screenHeight * 7 / 12);
 	button->SetSize(75, 75);
 	button->SetOnClick([]() {
 		GameStateMachine::GetInstance()->ChangeState(StateType::STATE_CREDIT);
 		});
 	m_listButton.push_back(button);
 
-	// credit button
+	// setting button
 	texture = ResourceManagers::GetInstance()->GetTexture("btn_settings.tga");
 	button = std::make_shared<GameButton>(model, shader, texture);
-	button->Set2DPosition(Globals::screenWidth / 6, Globals::screenHeight * 3 / 4);
+	button->Set2DPosition(Globals::screenWidth / 3+175, Globals::screenHeight * 7 / 12);
 	button->SetSize(75, 75);
 	button->SetOnClick([]() {
 		GameStateMachine::GetInstance()->ChangeState(StateType::STATE_CREDIT);
@@ -56,12 +56,12 @@ void GSMenu::Init()
 	m_listButton.push_back(button);
 
 	// exit button
-	texture = ResourceManagers::GetInstance()->GetTexture("btn_close.tga");
+	texture = ResourceManagers::GetInstance()->GetTexture("Quit.tga");
 	button = std::make_shared<GameButton>(model, shader, texture);
-	button->Set2DPosition(Globals::screenWidth - 50, 50);
+	button->Set2DPosition((float)Globals::screenWidth - 50, 50.0f);
 	button->SetSize(50, 50);
 	button->SetOnClick([]() {
-		GameStateMachine::GetInstance()->PopState();
+		exit(0);
 		});
 	m_listButton.push_back(button);
 

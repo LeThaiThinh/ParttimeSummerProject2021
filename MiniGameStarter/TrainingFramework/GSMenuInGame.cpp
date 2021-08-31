@@ -12,49 +12,55 @@ GSMenuInGame::~GSMenuInGame()
 void GSMenuInGame::Init()
 {
 	auto model = ResourceManagers::GetInstance()->GetModel("Sprite2D.nfg");
-	auto texture = ResourceManagers::GetInstance()->GetTexture("bg_main_menu.tga");
+	auto texture = ResourceManagers::GetInstance()->GetTexture("AfterGameBackGround.tga");
 
 	// background
 	auto shader = ResourceManagers::GetInstance()->GetShader("TextureShader");
 	m_background = std::make_shared<Sprite2D>(model, shader, texture);
-	m_background->Set2DPosition(Globals::screenWidth / 2, Globals::screenHeight / 2);
+	m_background->Set2DPosition((float)Globals::screenWidth / 2, (float)Globals::screenHeight / 2);
 	m_background->SetSize(Globals::screenWidth, Globals::screenHeight);
 
 	// exit button
-	texture = ResourceManagers::GetInstance()->GetTexture("btn_close.tga");
+	texture = ResourceManagers::GetInstance()->GetTexture("Exit.tga");
 	std::shared_ptr<GameButton> button = std::make_shared<GameButton>(model, shader, texture);
-	button->Set2DPosition(Globals::screenWidth - 50, 50);
-	button->SetSize(50, 50);
+	button->Set2DPosition((float)Globals::screenWidth *2/3, (float)Globals::screenHeight * 2 / 3);
+	button->SetSize(100, 100);
 	button->SetOnClick([]() {
-		GameStateMachine::GetInstance()->ChangeState(StateType::STATE_MENUAFTERGAME);
+		GameStateMachine::GetInstance()->PopState();
+		GameStateMachine::GetInstance()->PopState();
+		GSPlay::score = 0;
+		GSPlay::scoreOpponent = 0;
 		});
 	m_listButton.push_back(button);
 	// resume button
 	texture = ResourceManagers::GetInstance()->GetTexture("btn_prev.tga");
 	button = std::make_shared<GameButton>(model, shader, texture);
-	button->Set2DPosition(Globals::screenWidth - 150, 50);
-	button->SetSize(50, 50);
+	button->Set2DPosition((float)Globals::screenWidth /3, (float)Globals::screenHeight * 2 / 3);
+	button->SetSize(100, 100);
 	button->SetOnClick([]() {
-		GameStateMachine::GetInstance()->ChangeState(StateType::STATE_PLAY);
+		GameStateMachine::GetInstance()->PopState();
 		});
 	m_listButton.push_back(button);
 	// playagain button
-	texture = ResourceManagers::GetInstance()->GetTexture("btn_restart.tga");
+	texture = ResourceManagers::GetInstance()->GetTexture("PlayAgain.tga");
 	button = std::make_shared<GameButton>(model, shader, texture);
-	button->Set2DPosition(Globals::screenWidth - 250, 50);
-	button->SetSize(50, 50);
+	button->Set2DPosition((float)Globals::screenWidth/2 , (float)Globals::screenHeight*2/3);
+	button->SetSize(100, 100);
 	button->SetOnClick([]() {
 		GameStateMachine::GetInstance()->PopState();
+		GameStateMachine::GetInstance()->PopState();
 		GameStateMachine::GetInstance()->ChangeState(StateType::STATE_PLAY);
+		GSPlay::score = 0;
+		GSPlay::scoreOpponent = 0;
 		});
 	m_listButton.push_back(button);
 
-	// Credit Text
+	// Paused Text
 	shader = ResourceManagers::GetInstance()->GetShader("TextShader");
 	std::shared_ptr<Font> font = ResourceManagers::GetInstance()->GetFont("Brightly Crush Shine.otf");
 	std::shared_ptr<Text> text;
-	text = std::make_shared< Text>(shader, font, "Credit", Vector4(1.0f, 0.5f, 0.0f, 1.0f), 3.0f);
-	text->Set2DPosition(Vector2(Globals::screenWidth / 3 + 50, Globals::screenHeight * 1 / 6));
+	text = std::make_shared< Text>(shader, font, "Paused", Vector4(1.0f, 0.5f, 0.0f, 1.0f), 3.0f);
+	text->Set2DPosition(Vector2((float)Globals::screenWidth / 3 + 50, (float)Globals::screenHeight * 2 / 6));
 	m_textGameName.push_back(text);
 
 }
