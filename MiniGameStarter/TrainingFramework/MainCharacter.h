@@ -3,6 +3,8 @@
 #include "Movable.h"
 #include "Arrow.h"
 #include "../../ObjectPool.h"
+#include <AL/ClassSound.h>
+#include <GameStates/GSMenu.h>
 class Movable;
 class Arrow;
 enum class Direction {
@@ -30,6 +32,7 @@ public:
 	Arrow*  Shoot();
 	Arrow*	MoveRandomAndShoot(float deltaTime);
 	void	ReturnResourceArrow(Arrow* arrow);
+	static	ClassSound* sound;
 private:
 	ObjectPool<Arrow>* m_poolArrow;
 	float m_shootInterval;

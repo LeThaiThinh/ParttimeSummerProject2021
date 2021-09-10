@@ -1,5 +1,4 @@
 #include "GSCredit.h"
-#include "GSCredit.h"
 
 GSCredit::GSCredit() :GameStateBase(StateType::STATE_MENU),
 m_background(nullptr), m_listButton(std::list<std::shared_ptr<GameButton>>{}), m_textGameName(std::list<std::shared_ptr<Text>>{})
@@ -18,13 +17,13 @@ void GSCredit::Init()
 	// background
 	auto shader = ResourceManagers::GetInstance()->GetShader("TextureShader");
 	m_background = std::make_shared<Sprite2D>(model, shader, texture);
-	m_background->Set2DPosition(Globals::screenWidth / 2, Globals::screenHeight / 2);
+	m_background->Set2DPosition((float)Globals::screenWidth / 2, (float)Globals::screenHeight / 2);
 	m_background->SetSize(Globals::screenWidth, Globals::screenHeight);
 
 	// exit button
 	texture = ResourceManagers::GetInstance()->GetTexture("btn_close.tga");
 	std::shared_ptr<GameButton> button = std::make_shared<GameButton>(model, shader, texture);
-	button->Set2DPosition(Globals::screenWidth - 50, 50);
+	button->Set2DPosition((float)Globals::screenWidth - 50, 50.f);
 	button->SetSize(50, 50);
 	button->SetOnClick([]() {
 		GameStateMachine::GetInstance()->PopState();
@@ -36,16 +35,16 @@ void GSCredit::Init()
 	std::shared_ptr<Font> font = ResourceManagers::GetInstance()->GetFont("Brightly Crush Shine.otf");
 	std::shared_ptr<Text> text;
 	text = std::make_shared< Text>(shader, font, "Credit", Vector4(1.0f, 0.5f, 0.0f, 1.0f), 3.0f);
-	text->Set2DPosition(Vector2(Globals::screenWidth / 3 + 50, Globals::screenHeight * 1 / 6));
+	text->Set2DPosition(Vector2((float)Globals::screenWidth / 3 + 50, (float)Globals::screenHeight * 1 / 6));
 	m_textGameName.push_back(text);
 	text = std::make_shared< Text>(shader, font, "Director - Le Thai Thinh", Vector4(1.0f, 0.5f, 0.0f, 1.0f), 1.0f);
-	text->Set2DPosition(Vector2(Globals::screenWidth / 3, Globals::screenHeight * 3 / 6));
+	text->Set2DPosition(Vector2((float)Globals::screenWidth / 3, (float)Globals::screenHeight * 3 / 6));
 	m_textGameName.push_back(text);
 	text = std::make_shared< Text>(shader, font, "Progammer - Le Thai Thinh", Vector4(1.0f, 0.5f, 0.0f, 1.0f), 1.0f);
-	text->Set2DPosition(Vector2(Globals::screenWidth / 3, Globals::screenHeight * 2 / 6));
+	text->Set2DPosition(Vector2((float)Globals::screenWidth / 3, (float)Globals::screenHeight * 2 / 6));
 	m_textGameName.push_back(text);
 	text = std::make_shared< Text>(shader, font, "Designer - Le Thai Thinh", Vector4(1.0f, 0.5f, 0.0f, 1.0f), 1.0f);
-	text->Set2DPosition(Vector2(Globals::screenWidth / 3, Globals::screenHeight * 4 / 6));
+	text->Set2DPosition(Vector2((float)Globals::screenWidth / 3, (float)Globals::screenHeight * 4 / 6));
 	m_textGameName.push_back(text);
 
 }

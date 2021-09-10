@@ -2,9 +2,10 @@
 #include "GameStateBase.h"
 #include "../../MainCharacter.h"
 #include "../../ObjectPool.h"
-#include "../../HandFan.h"
+#include "../../Target.h"
 #include "../../Explosion.h"
 #include "GameButton.h"
+#include <GameStates/GSMenu.h>
 
 
 class Sprite2D;
@@ -34,8 +35,8 @@ public:
 	void	HandleMouseMoveEvents(int x, int y) override;
 	void	Update(float deltaTime) override;
 	void	Draw() override;
-
-
+	
+	static ClassSound* sound;
 private:
 	std::shared_ptr<Sprite2D>	m_background;
 	std::shared_ptr<Text>		m_timer;

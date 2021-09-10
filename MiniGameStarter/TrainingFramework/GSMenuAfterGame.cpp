@@ -30,6 +30,9 @@ void GSMenuAfterGame::Init()
 		GameStateMachine::GetInstance()->PopState();
 		GSPlay::score = 0;
 		GSPlay::scoreOpponent = 0;
+		GSPlay::sound->Stop();
+		if(GSMenu::backgroundMusic)
+			GSMenu::sound->PlayLoopSound();
 		});
 	m_listButton.push_back(button);
 	// playagain button

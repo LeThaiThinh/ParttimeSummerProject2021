@@ -1,5 +1,6 @@
 #include "MainCharacter.h"
 
+ClassSound* MainCharacter::sound = new ClassSound("../Data/Sound/Arrow.wav");
 
 MainCharacter::MainCharacter(GLint id, std::shared_ptr<Model> model, std::shared_ptr<Shader> shader, std::shared_ptr<Texture> texture)
 	: Sprite2D(id,model,shader,texture)
@@ -70,6 +71,7 @@ Arrow* MainCharacter::Shoot()
 {
 	if (m_shootTime >= m_shootInterval) {
 		m_shootTime = 0;
+		if (GSMenu::vfxMusic)sound->PlaySound();
 		return m_poolArrow->getResource2(m_position);
 	}
 	return nullptr;

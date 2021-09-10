@@ -19,6 +19,9 @@
     <Filter Include="TrainingFramework\src\GameObject\Base">
       <UniqueIdentifier>{d3ff3788-46e2-42fd-b94b-0b4b69a674a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TrainingFramework\src\AL">
+      <UniqueIdentifier>{5420b59b-4eb1-4db1-8567-660f70b04e53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -51,7 +54,7 @@
     <ClCompile Include="Arrow.cpp">
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="HandFan.cpp">
+    <ClCompile Include="Target.cpp">
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="MainCharacter.cpp">
@@ -96,6 +99,21 @@
     <ClCompile Include="Explosion.cpp">
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="src\AL\SoundBuffer.cpp">
+      <Filter>TrainingFramework\src\AL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AL\SoundDevice.cpp">
+      <Filter>TrainingFramework\src\AL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AL\SoundSource.cpp">
+      <Filter>TrainingFramework\src\AL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AL\ClassSound.cpp">
+      <Filter>TrainingFramework\src\AL</Filter>
+    </ClCompile>
+    <ClCompile Include="GSOption.cpp">
+      <Filter>TrainingFramework\src\GameStates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h">
@@ -131,7 +149,7 @@
     <ClInclude Include="Arrow.h">
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="HandFan.h">
+    <ClInclude Include="Target.h">
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="MainCharacter.h">
@@ -190,6 +208,21 @@
     </ClInclude>
     <ClInclude Include="Explosion.h">
       <Filter>TrainingFramework\src\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AL\SoundBuffer.h">
+      <Filter>TrainingFramework\src\AL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AL\SoundDevice.h">
+      <Filter>TrainingFramework\src\AL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AL\SoundSource.h">
+      <Filter>TrainingFramework\src\AL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AL\ClassSound.h">
+      <Filter>TrainingFramework\src\AL</Filter>
+    </ClInclude>
+    <ClInclude Include="GSOption.h">
+      <Filter>TrainingFramework\src\GameStates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

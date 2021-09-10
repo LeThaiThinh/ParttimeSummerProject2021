@@ -152,7 +152,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;WinMM.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;libEGL.lib;libGLESv2.lib;WinMM.Lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\Lib\Nvidia;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
@@ -308,7 +308,12 @@
     <ClCompile Include="GSCredit.cpp" />
     <ClCompile Include="GSMenuAfterGame.cpp" />
     <ClCompile Include="GSMenuInGame.cpp" />
-    <ClCompile Include="HandFan.cpp" />
+    <ClCompile Include="GSOption.cpp" />
+    <ClCompile Include="src\AL\ClassSound.cpp" />
+    <ClCompile Include="src\AL\SoundBuffer.cpp" />
+    <ClCompile Include="src\AL\SoundDevice.cpp" />
+    <ClCompile Include="src\AL\SoundSource.cpp" />
+    <ClCompile Include="Target.cpp" />
     <ClCompile Include="MainCharacter.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\GameManager\ResourceManagers.cpp" />
@@ -334,7 +339,12 @@
     <ClInclude Include="Explosion.h" />
     <ClInclude Include="GSMenuAfterGame.h" />
     <ClInclude Include="GSMenuInGame.h" />
-    <ClInclude Include="HandFan.h" />
+    <ClInclude Include="GSOption.h" />
+    <ClInclude Include="src\AL\ClassSound.h" />
+    <ClInclude Include="src\AL\SoundBuffer.h" />
+    <ClInclude Include="src\AL\SoundDevice.h" />
+    <ClInclude Include="src\AL\SoundSource.h" />
+    <ClInclude Include="Target.h" />
     <ClInclude Include="GSCredit.h" />
     <ClInclude Include="MainCharacter.h" />
     <ClInclude Include="Movable.h" />

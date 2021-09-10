@@ -2,6 +2,9 @@
 #include "AnimationSprite.h"
 #include "SelfDestructable.h"
 #include "ResourceManagers.h"
+#include <AL/classSound.h>
+#include <GameStates/GSMenu.h>
+
 class Explosion :
     public AnimationSprite, SelfDestructable
 {
@@ -14,6 +17,7 @@ public:
     void Update(GLfloat);
     bool IsExist();
     bool IsYou();
+    static ClassSound* sound ;
 private:
     bool m_isYou;
 };

@@ -4,9 +4,9 @@
 #include "Camera.h"
 #include "Texture.h"
 #include "Application.h"
-
+ClassSound* Explosion::sound = new ClassSound("../Data/Sound/Bomb.wav");
 Explosion::Explosion()
-	:AnimationSprite()
+	:AnimationSprite() , m_isYou(true)
 {
 }
 
@@ -19,6 +19,7 @@ Explosion::Explosion(std::shared_ptr<Model> model, std::shared_ptr<Shader> shade
 Explosion::Explosion( float x, float y, bool isYou)
 	: AnimationSprite(7, 0.07f, x, y), SelfDestructable(),m_isYou(isYou)
 {
+	if(GSMenu::vfxMusic)sound->PlaySound();
 	Set2DPosition(x, y);
 	Init();
 }

@@ -7,7 +7,14 @@
 #include "Sprite2D.h"
 #include "Sprite3D.h"
 #include "Text.h"
-#include "../HandFan.h"
+#include "../../Target.h"
+
+
+int GameStateBase::keyPress = 0;
+ObjectPool<Target>* ObjectPool<Target>::instance = 0;
+int GSPlay::score = 0;
+int GSPlay::scoreOpponent = 0;
+ClassSound* GSPlay::sound = new ClassSound("../Data/Sound/BackgroundMusicPlay.wav");
 
 GSPlay::GSPlay() :GameStateBase(StateType::STATE_PLAY),m_time(60.0f),m_poolTarget (ObjectPool<Target>::getInstance())
 {
@@ -17,13 +24,12 @@ GSPlay::~GSPlay()
 {
 }
 
-int GameStateBase::keyPress = 0;
-ObjectPool<Target>* ObjectPool<Target>::instance = 0;
-int GSPlay::score = 0;
-int GSPlay::scoreOpponent = 0;
+
 void GSPlay::Init()
 {
-
+	if (GSMenu::backgroundMusic) {
+		sound->PlayLoopSound();
+	}
 	srand(time(0));
 	//
 	auto model = ResourceManagers::GetInstance()->GetModel("Sprite2D.nfg");
@@ -34,7 +40,6 @@ void GSPlay::Init()
 	m_background = std::make_shared<Sprite2D>(model, shader, texture);
 	m_background->Set2DPosition((float)Globals::screenWidth / 2, (float)Globals::screenHeight / 2);
 	m_background->SetSize(Globals::screenWidth, Globals::screenHeight);
-
 	// button pause
 	texture = ResourceManagers::GetInstance()->GetTexture("Pause.tga");
 	std::shared_ptr<GameButton>  button = std::make_shared<GameButton>(model, shader, texture);
@@ -47,17 +52,21 @@ void GSPlay::Init()
 	// main character
 	texture = ResourceManagers::GetInstance()->GetTexture("MainCharacter.tga");
 	m_mainCharacter = std::make_shared<MainCharacter>(model, shader, texture);
+	texture = ResourceManagers::GetInstance()->GetTexture("Opponent.tga");
 	m_mainOpponent = std::make_shared<MainCharacter>(model, shader, texture);
 	// timer
 	shader = ResourceManagers::GetInstance()->GetShader("TextShader");
-	std::shared_ptr<Font> font = ResourceManagers::GetInstance()->GetFont("Brightly Crush Shine.otf");
+	std::shared_ptr<Font> font = ResourceManagers::GetInstance()->GetFont("arialbd.ttf");
 	m_timer = std::make_shared< Text>(shader, font, "Time:"+std::to_string((int)m_time), TextColor::RED, 1.0f);
-	m_timer->Set2DPosition(Vector2((float)Globals::screenWidth / 2 , 25.0f));
+	m_timer->Set2DPosition(Vector2((float)Globals::screenWidth / 2 - 40 , 25.0f));
 	// score
 	m_score = std::make_shared< Text>(shader, font, "Your Score:" + std::to_string(GSPlay::score), TextColor::RED, 1.0f);
-	m_score->Set2DPosition(Vector2((float)Globals::screenWidth/2 - 300, 25.0f));
+	m_score->Set2DPosition(Vector2((float)Globals::screenWidth/2 - 200, 75.0f));
 	m_scoreOpponent = std::make_shared< Text>(shader, font, "Opponent's score:" + std::to_string(GSPlay::scoreOpponent), TextColor::RED, 1.0f);
-	m_scoreOpponent->Set2DPosition(Vector2((float)Globals::screenWidth / 2 + 150, 25.0f));
+	m_scoreOpponent->Set2DPosition(Vector2((float)Globals::screenWidth / 2 + 50, 75.0f));
+	//
+	
+
 }
 
 void GSPlay::Exit()
