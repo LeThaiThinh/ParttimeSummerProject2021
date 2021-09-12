@@ -309,7 +309,7 @@
     <ClCompile Include="GSMenuAfterGame.cpp" />
     <ClCompile Include="GSMenuInGame.cpp" />
     <ClCompile Include="GSOption.cpp" />
-    <ClCompile Include="src\AL\ClassSound.cpp" />
+    <ClCompile Include="src\AL\Sound.cpp" />
     <ClCompile Include="src\AL\SoundBuffer.cpp" />
     <ClCompile Include="src\AL\SoundDevice.cpp" />
     <ClCompile Include="src\AL\SoundSource.cpp" />
@@ -340,7 +340,7 @@
     <ClInclude Include="GSMenuAfterGame.h" />
     <ClInclude Include="GSMenuInGame.h" />
     <ClInclude Include="GSOption.h" />
-    <ClInclude Include="src\AL\ClassSound.h" />
+    <ClInclude Include="src\AL\Sound.h" />
     <ClInclude Include="src\AL\SoundBuffer.h" />
     <ClInclude Include="src\AL\SoundDevice.h" />
     <ClInclude Include="src\AL\SoundSource.h" />

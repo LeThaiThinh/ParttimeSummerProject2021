@@ -2,8 +2,9 @@
 #include"SoundBuffer.h"
 #include"SoundDevice.h"
 #include"SoundSource.h"
+#include "utilities.h"
 #include<iostream>
-class ClassSound
+class Sound
 {
 private:
 	SoundDevice* m_soundDevice = SoundDevice::get();
@@ -11,12 +12,11 @@ private:
 	uint32_t m_song;
 	std::string m_path = "";
 public:
-	ClassSound(std::string path);
+	Sound(const std::string& path);
 	void PlaySound();
 	void Play();
 	void PlayLoopSound();
 	void PlayLoop();
-	void StopSound();
 	void Stop();
 };
 

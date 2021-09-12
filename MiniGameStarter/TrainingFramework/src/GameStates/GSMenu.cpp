@@ -1,8 +1,5 @@
-#include "GSMenu.h"
 #include "Camera.h"
-ClassSound* GSMenu::sound = new ClassSound("../Data/Sound/BackgroundMusic.wav");
-bool GSMenu::backgroundMusic = true;
-bool GSMenu::vfxMusic = true;
+#include "GSMenu.h"
 
 GSMenu::GSMenu() : GameStateBase(StateType::STATE_MENU), 
 	m_background(nullptr), m_listButton(std::list<std::shared_ptr<GameButton>>{}), m_textGameName(nullptr)

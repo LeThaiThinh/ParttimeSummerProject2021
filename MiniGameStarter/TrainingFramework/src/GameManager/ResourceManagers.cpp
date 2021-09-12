@@ -7,6 +7,7 @@
 #include "GameObject/Sprite2D.h"
 #include "GameObject/Sprite3D.h"
 #include "GameObject/Text.h"
+#include <AL/Sound.h>
 
 
 ResourceManagers::ResourceManagers()
@@ -16,6 +17,7 @@ ResourceManagers::ResourceManagers()
 	m_TexturePath = dataPath + "Textures\\";
 	m_ModelsPath = dataPath + "Model\\";
 	m_FontPath = dataPath + "fonts\\";
+	m_SoundPath = dataPath + "Sound\\";
 }
 
 ResourceManagers::~ResourceManagers()
@@ -78,6 +80,18 @@ void ResourceManagers::AddFont(const std::string& name)
 	m_MapFont.insert(std::pair<std::string, std::shared_ptr<Font>>(name, font));
 }
 
+void ResourceManagers::AddSound(const std::string& name)
+{
+	auto it = m_MapSound.find(name);
+	if (it != m_MapSound.end())
+	{
+		return;
+	}
+	std::string path = m_FontPath + name;
+	std::shared_ptr<Sound> font = std::make_shared<Sound>(path);
+	m_MapSound.insert(std::pair<std::string, std::shared_ptr<Sound>>(name, font));
+}
+
 void ResourceManagers::RemoveShader(const std::string& name)
 {
 	m_MapShader.erase(name);
@@ -96,6 +110,11 @@ void ResourceManagers::RemoveTexture(const std::string& name)
 void ResourceManagers::RemoveFont(const std::string& name)
 {
 	m_MapFont.erase(name);
+}
+
+void ResourceManagers::RemoveSound(const std::string& name)
+{
+	m_MapSound.erase(name);
 }
 
 std::shared_ptr<Shader> ResourceManagers::GetShader(const std::string& name)
@@ -144,6 +163,19 @@ std::shared_ptr<Model> ResourceManagers::GetModel(const std::string& name)
 	m_MapModels.insert(std::pair<std::string, std::shared_ptr<Model>>(name, model));
 
 	return model;
+}
+std::shared_ptr<Sound> ResourceManagers::GetSound(const std::string& name)
+{
+	auto it = m_MapSound.find(name);
+	if (it != m_MapSound.end())
+	{
+		return it->second;
+	}
+	std::string path = m_SoundPath + name;
+	std::shared_ptr<Sound> sound = std::make_shared<Sound>(path);
+	m_MapSound.insert(std::pair<std::string, std::shared_ptr<Sound>>(name, sound));
+
+	return sound;
 }
 
 std::shared_ptr<Font> ResourceManagers::GetFont(const std::string& name)

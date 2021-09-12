@@ -108,7 +108,7 @@
     <ClCompile Include="src\AL\SoundSource.cpp">
       <Filter>TrainingFramework\src\AL</Filter>
     </ClCompile>
-    <ClCompile Include="src\AL\ClassSound.cpp">
+    <ClCompile Include="src\AL\Sound.cpp">
       <Filter>TrainingFramework\src\AL</Filter>
     </ClCompile>
     <ClCompile Include="GSOption.cpp">
@@ -218,7 +218,7 @@
     <ClInclude Include="src\AL\SoundSource.h">
       <Filter>TrainingFramework\src\AL</Filter>
     </ClInclude>
-    <ClInclude Include="src\AL\ClassSound.h">
+    <ClInclude Include="src\AL\Sound.h">
       <Filter>TrainingFramework\src\AL</Filter>
     </ClInclude>
     <ClInclude Include="GSOption.h">

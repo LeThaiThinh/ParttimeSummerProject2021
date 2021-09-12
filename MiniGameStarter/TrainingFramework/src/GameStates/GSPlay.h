@@ -36,7 +36,7 @@ public:
 	void	Update(float deltaTime) override;
 	void	Draw() override;
 	
-	static ClassSound* sound;
+	static std::shared_ptr<Sound> sound;
 private:
 	std::shared_ptr<Sprite2D>	m_background;
 	std::shared_ptr<Text>		m_timer;

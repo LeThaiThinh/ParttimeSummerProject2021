@@ -1,7 +1,7 @@
 #pragma once
 #include "GameStateBase.h"
 #include "GameButton.h"
-#include <AL/ClassSound.h>
+#include <AL/Sound.h>
 
 class GSMenu :
 	public GameStateBase
@@ -22,7 +22,7 @@ public:
 	void	HandleMouseMoveEvents(int x, int y) override;
 	void	Update(float deltaTime) override;
 	void	Draw() override;
-	static	ClassSound* GSMenu::sound ;
+	static	std::shared_ptr<Sound> sound ;
 	bool static vfxMusic;
 	bool static backgroundMusic;
 private:

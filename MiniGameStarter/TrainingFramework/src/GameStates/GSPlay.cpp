@@ -14,7 +14,6 @@ int GameStateBase::keyPress = 0;
 ObjectPool<Target>* ObjectPool<Target>::instance = 0;
 int GSPlay::score = 0;
 int GSPlay::scoreOpponent = 0;
-ClassSound* GSPlay::sound = new ClassSound("../Data/Sound/BackgroundMusicPlay.wav");
 
 GSPlay::GSPlay() :GameStateBase(StateType::STATE_PLAY),m_time(60.0f),m_poolTarget (ObjectPool<Target>::getInstance())
 {
@@ -157,8 +156,8 @@ void GSPlay::Update(float deltaTime)
 			m_listArrow.push_back(arrow);
 		}
 	}
-	m_mainOpponent->Update(deltaTime);
 	Arrow* arrow = m_mainOpponent->MoveRandomAndShoot(deltaTime);
+	m_mainOpponent->Update(deltaTime);
 	if (arrow != nullptr) {
 		m_listArrowOpponent.push_back(arrow);
 	}
@@ -186,7 +185,7 @@ void GSPlay::Update(float deltaTime)
 					m_listRemoveArrow.push_back(arrow);
 					Explosion* explosion =new Explosion(it->GetPosition().x, it->GetPosition().y,true);
 					m_listExplosion.push_back(explosion);
-					GSPlay::score += 2;
+					GSPlay::score += 1;
 				}
 				else {
 					GSPlay::score++;
@@ -206,7 +205,7 @@ void GSPlay::Update(float deltaTime)
 					m_listRemoveArrow.push_back(arrow);
 					Explosion* explosion = new Explosion(  it->GetPosition().x, it->GetPosition().y,false);
 					m_listExplosion.push_back(explosion);
-					GSPlay::scoreOpponent += 2;
+					GSPlay::scoreOpponent += 1;
 				}
 				else {
 					GSPlay::scoreOpponent++;
@@ -225,7 +224,7 @@ void GSPlay::Update(float deltaTime)
 					else if (it->GetType() == TargetType::BOMB) {
 						Explosion* explosion = new Explosion( it->GetPosition().x, it->GetPosition().y, false);
 						m_listExplosion.push_back(explosion);
-						GSPlay::scoreOpponent += 2;
+						GSPlay::scoreOpponent += 1;
 					}
 					else {
 						GSPlay::scoreOpponent++;
@@ -238,7 +237,7 @@ void GSPlay::Update(float deltaTime)
 					else if (it->GetType() == TargetType::BOMB) {
 						Explosion* explosion = new Explosion( it->GetPosition().x, it->GetPosition().y, true);
 						m_listExplosion.push_back(explosion);
-						GSPlay::score += 2;
+						GSPlay::score += 1;
 					}
 					else {
 						GSPlay::score++;

@@ -2,7 +2,7 @@
 #include "AnimationSprite.h"
 #include "SelfDestructable.h"
 #include "ResourceManagers.h"
-#include <AL/classSound.h>
+#include <AL/Sound.h>
 #include <GameStates/GSMenu.h>
 
 class Explosion :
@@ -17,7 +17,7 @@ public:
     void Update(GLfloat);
     bool IsExist();
     bool IsYou();
-    static ClassSound* sound ;
+    static std::shared_ptr<Sound> sound ;
 private:
     bool m_isYou;
 };

@@ -1,6 +1,6 @@
 #include "MainCharacter.h"
 
-ClassSound* MainCharacter::sound = new ClassSound("../Data/Sound/Arrow.wav");
+std::shared_ptr<Sound> MainCharacter::sound = ResourceManagers::GetInstance()->GetSound("Arrow.wav");
 
 MainCharacter::MainCharacter(GLint id, std::shared_ptr<Model> model, std::shared_ptr<Shader> shader, std::shared_ptr<Texture> texture)
 	: Sprite2D(id,model,shader,texture)
@@ -34,10 +34,11 @@ ObjectPool<Arrow>* ObjectPool<Arrow>::instance = 0;
 void MainCharacter::Init()
 {
 	m_arrived = true;
+	m_toArrive = Vector3((GLfloat)Globals::screenWidth / 2, (GLfloat)Globals::screenHeight - 50,0.f);
 	m_shootInterval = 0.4f;
 	m_shootTime = 0.0f;
 	m_poolArrow = ObjectPool<Arrow>::getInstance();
-	Set2DPosition(Vector2((GLfloat)Globals::screenWidth/2, (GLfloat)Globals::screenHeight-50));
+	Set2DPosition(Vector2((GLfloat)Globals::screenWidth / 2, (GLfloat)Globals::screenHeight - 50));
 	SetSize(60, 80);
 	SetSpeed(200.0f);
 }
@@ -64,6 +65,8 @@ void MainCharacter::Move(GLfloat deltatime)
 bool MainCharacter::MoveTo(GLfloat deltatime, Vector3 position)
 {
 	Set2DPosition(m_position.x + deltatime * m_speed * m_direction.x, m_position.y + deltatime * m_speed * m_direction.y);
+	if (m_position.x < 0)Set2DPosition(0, (GLfloat)m_position.y);
+	if (m_position.x > Globals::screenWidth)Set2DPosition((GLfloat)Globals::screenWidth, (GLfloat)m_position.y);
 	return m_toArrive.operator-(m_position).Length() < 10.0f;
 }
 

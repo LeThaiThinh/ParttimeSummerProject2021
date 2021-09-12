@@ -4,7 +4,7 @@
 #include "Camera.h"
 #include "Texture.h"
 #include "Application.h"
-ClassSound* Explosion::sound = new ClassSound("../Data/Sound/Bomb.wav");
+std::shared_ptr<Sound> Explosion::sound = ResourceManagers::GetInstance()->GetSound("Bomb.wav");
 Explosion::Explosion()
 	:AnimationSprite() , m_isYou(true)
 {
@@ -17,7 +17,7 @@ Explosion::Explosion(std::shared_ptr<Model> model, std::shared_ptr<Shader> shade
 	Init();
 }
 Explosion::Explosion( float x, float y, bool isYou)
-	: AnimationSprite(7, 0.07f, x, y), SelfDestructable(),m_isYou(isYou)
+	: AnimationSprite(16, 0.033,4, x, y), SelfDestructable(),m_isYou(isYou)
 {
 	if(GSMenu::vfxMusic)sound->PlaySound();
 	Set2DPosition(x, y);
@@ -30,7 +30,7 @@ Explosion::~Explosion()
 void Explosion::Init()
 {
 	SetModels(ResourceManagers::GetInstance()->GetModel("Sprite2D.nfg"));
-	SetTexture(ResourceManagers::GetInstance()->GetTexture("explosion.tga"));
+	SetTexture(ResourceManagers::GetInstance()->GetTexture("Bomb2.tga"));
 	SetShaders(ResourceManagers::GetInstance()->GetShader("AnimationShader"));
 	SetSize(200,200);
 	m_timeExist = 0.5f;
@@ -43,10 +43,11 @@ void Explosion::Update(GLfloat deltatime)
 	m_currentFrameTime += deltatime;
 	if (m_currentFrameTime >= m_frameTime) {
 		m_currentFrame++;
+		m_currentColumn = (m_currentFrame % m_numFramesInLine);
+		m_currentLine = (m_currentFrame / m_numFramesInLine);
 		if (m_currentFrame >= m_numFrames) {
 			m_currentFrame = 0;
-		}
-		m_currentFrameTime -= m_frameTime;
+		}		m_currentFrameTime -= m_frameTime;
 	}
 }
 bool Explosion::IsExist()
